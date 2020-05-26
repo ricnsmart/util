@@ -5,7 +5,6 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"fmt"
-	"net/url"
 )
 
 func GeneratorSignature(accessKey, method, res, version string, et int) (string, error) {
@@ -23,12 +22,4 @@ func GeneratorSignature(accessKey, method, res, version string, et int) (string,
 	}
 	// 拼装token 对value部分需要经过URL编码
 	return base64.StdEncoding.EncodeToString(h.Sum(nil)), nil
-}
-
-func NewTokenWithTimestamp(accessKey, method, res, version string, et int) (string, error) {
-	sign, err := GeneratorSignature(accessKey, method, res, version, et)
-	if err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("version=%v&res=%v&et=%v&method=%v&sign=%v", version, url.QueryEscape(res), et, method, url.QueryEscape(sign)), nil
 }

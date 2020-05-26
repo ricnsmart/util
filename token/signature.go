@@ -22,8 +22,3 @@ func ValidateSignature(msg, token, nonce, signature string) bool {
 	expect := NewSignature(msg, token, nonce)
 	return expect == signature
 }
-
-func NewTokenWithNonce(msg, token, nonce string) string {
-	signature := NewSignature(msg, token, nonce)
-	return fmt.Sprintf(`msg=%v&nonce=%v&signature=%v`, msg, nonce, signature)
-}

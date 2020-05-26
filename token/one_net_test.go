@@ -49,39 +49,3 @@ func TestNewToken(t *testing.T) {
 		})
 	}
 }
-
-func TestNewToken1(t *testing.T) {
-	type args struct {
-		accessKey string
-		method    string
-		res       string
-		version   string
-		et        int
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    string
-		wantErr bool
-	}{
-		{"test1", args{
-			accessKey: accessKey,
-			method:    method,
-			res:       res,
-			version:   version,
-			et:        et,
-		}, token, false},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewTokenWithTimestamp(tt.args.accessKey, tt.args.method, tt.args.res, tt.args.version, tt.args.et)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("NewTokenWithTimestamp() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if got != tt.want {
-				t.Errorf("NewTokenWithTimestamp() got = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
