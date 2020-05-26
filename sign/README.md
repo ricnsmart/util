@@ -1,5 +1,29 @@
 
 
+## NewSignatureWithNonce
+
+用户在配置页面完成配置并点击“提交”时，OneNET平台会向填写URL地址发送HTTP **GET**请求进行URL验证，请求形式示例如下：
+
+```
+http://url?msg=xxx&nonce=xxx&signature=xxx
+```
+
+其中，*url*为用户在页面配置时填写的URL，*nonce*、*msg*、*signature*用于URL及token的验证
+
+token验证过程如下：
+
+1. 将配置页面中配置的*token*与*nonce*、*msg*的值计算MD5，并且编码为Base64字符串值
+2. 将上一步中Base64字符串值通过URL Decode计算后的值与请求参数*signature*的值进行对比，如果相等则表示token验证成功
+
+如果token验证成功，返回*msg*参数值，表示URL验证通过。
+
+```
+如果用户不想验证token，可以选择跳过MD5计算过程，直接返回msg参数值
+```
+
+
+
+## NewSignatureWithTimestamp
 ### token 组成与算法
 
 token由多个参数构成，如下表：
