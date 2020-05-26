@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+vendor
+.idea
+.DS_Store
+.vscode
+pkg
+*.zip
+Gopkg.lock
+*.log
