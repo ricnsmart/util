@@ -1,4 +1,4 @@
-package encrypt
+package token
 
 import (
 	"crypto/md5"
