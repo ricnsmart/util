@@ -26,6 +26,12 @@ func NewSignatureWithTimestamp(accessKey, method, res, version string, et int) (
 	return base64.StdEncoding.EncodeToString(h.Sum(nil)), nil
 }
 
+type EncryptMsg struct {
+	Msg       string
+	Signature string
+	Nonce     string
+}
+
 // 生成签名
 // AES对称加密
 func NewSignatureWithNonce(msg, token, nonce string) string {
