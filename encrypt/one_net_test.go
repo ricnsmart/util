@@ -40,7 +40,7 @@ func TestNewToken(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := GeneratorSignature(tt.args.accessKey, tt.args.method, tt.args.res, tt.args.version, tt.args.et)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("NewToken() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("NewTokenWithTimestamp() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
@@ -74,13 +74,13 @@ func TestNewToken1(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewToken(tt.args.accessKey, tt.args.method, tt.args.res, tt.args.version, tt.args.et)
+			got, err := NewTokenWithTimestamp(tt.args.accessKey, tt.args.method, tt.args.res, tt.args.version, tt.args.et)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("NewToken() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("NewTokenWithTimestamp() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
-				t.Errorf("NewToken() got = %v, want %v", got, tt.want)
+				t.Errorf("NewTokenWithTimestamp() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

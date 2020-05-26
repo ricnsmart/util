@@ -25,7 +25,7 @@ func GeneratorSignature(accessKey, method, res, version string, et int) (string,
 	return base64.StdEncoding.EncodeToString(h.Sum(nil)), nil
 }
 
-func NewToken(accessKey, method, res, version string, et int) (string, error) {
+func NewTokenWithTimestamp(accessKey, method, res, version string, et int) (string, error) {
 	sign, err := GeneratorSignature(accessKey, method, res, version, et)
 	if err != nil {
 		return "", err

@@ -18,28 +18,28 @@ const (
 
 func TestNewSignature(t *testing.T) {
 	type args struct {
-		msg    string
-		token  string
-		nonces []string
+		msg   string
+		token string
+		nonce string
 	}
 	tests := []struct {
 		name string
 		args args
 	}{
 		{"test1", args{
-			msg:    msg1,
-			token:  token1,
-			nonces: []string{nonce1},
+			msg:   msg1,
+			token: token1,
+			nonce: nonce1,
 		}},
 		{"test2", args{
-			msg:    msg2,
-			token:  token2,
-			nonces: []string{nonce2},
+			msg:   msg2,
+			token: token2,
+			nonce: nonce2,
 		}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			signature := NewSignature(tt.args.msg, tt.args.token, tt.args.nonces...)
+			signature := NewSignature(tt.args.msg, tt.args.token, tt.args.nonce)
 			fmt.Println(signature)
 		})
 	}

@@ -4,20 +4,13 @@ import (
 	"crypto/md5"
 	"encoding/base64"
 	"fmt"
-	"github.com/ricnsmart/util/rand"
 	"strings"
 )
 
 // 生成签名
 // AES对称加密
-func NewSignature(msg, token string, nonces ...string) string {
+func NewSignature(msg, token, nonce string) string {
 	m := md5.New()
-	var nonce string
-	if len(nonces) != 0 {
-		nonce = nonces[0]
-	} else {
-		nonce = rand.RandomString(10)
-	}
 	m.Write([]byte(fmt.Sprintf(`%v%v%v`, token, nonce, msg)))
 	str := base64.StdEncoding.EncodeToString(m.Sum(nil))
 	// + 号替换为 空格
@@ -28,4 +21,9 @@ func NewSignature(msg, token string, nonces ...string) string {
 func ValidateSignature(msg, token, nonce, signature string) bool {
 	expect := NewSignature(msg, token, nonce)
 	return expect == signature
+}
+
+func NewTokenWithNonce(msg, token, nonce string) string {
+	signature := NewSignature(msg, token, nonce)
+	return fmt.Sprintf(`msg=%v&nonce=%v&signature=%v`, msg, nonce, signature)
 }
